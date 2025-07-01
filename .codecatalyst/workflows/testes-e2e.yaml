@@ -7,15 +7,12 @@ Triggers:
       - main
 
 Actions:
-  RodarTestes:
-    Identifier: RodarTestesAction
-    ActionType: RunCommand
+  RunTests:
+    Identifier: aws.codeartifact/run@1
     Inputs:
-      Runtime: nodejs18
+      Image: public.ecr.aws/bitnami/node:18
       Commands:
-        - echo "Instalando dependências..."
         - npm install
-        - echo "Executando testes Cypress..."
         - npx cypress run
 
 
