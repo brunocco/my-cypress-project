@@ -8,6 +8,7 @@ Triggers:
 
 Actions:
   RodarCypress:
+    Identifier: RodarCypressBuild
     ActionType: AWS::CodeBuild::Build
     Inputs:
       Sources:
@@ -19,6 +20,7 @@ Actions:
         - npm install
         - echo "Executando testes Cypress..."
         - npx cypress run
+
 
 
 
