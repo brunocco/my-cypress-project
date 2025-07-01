@@ -1,5 +1,5 @@
 SchemaVersion: 1.0
-Name: Rodar Testes Cypress
+Name: Rodar-Testes-Cypress
 
 Triggers:
   - Type: Push
@@ -17,7 +17,8 @@ Actions:
       Commands:
         - echo "Instalando dependências..."
         - npm install
-        - echo "Rodando testes Cypress..."
+        - echo "Executando testes Cypress..."
         - npx cypress run
+
 
 
