@@ -5,13 +5,15 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - echo "Instalando dependências..."
+      - echo Installing dependencies...
       - npm install
+      # instalar libs necessárias para o Cypress
+      - yum install -y libX11 libXScrnSaver libXtst libXrandr libXcursor libXdamage libXfixes mesa-libGL alsa-lib
   build:
     commands:
-      - echo "Executando testes Cypress..."
+      - echo Running Cypress tests...
       - npx cypress run
-
 artifacts:
   files:
-    - "**/*"
+    - '**/*'
+
