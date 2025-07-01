@@ -25,9 +25,10 @@ Estudante de Análise e Desenvolvimento de Sistemas • Analista QA + Suporte cl
 📦 Estrutura do Projeto
 ```bash
 my-cypress-project/
+├── .codecatalyst/
+│   └── workflows/
+│       └── testes-e2e.yaml
 ├── cypress/
-│   └── e2e/
-│       └── login.spec.js
 ├── cypress.config.js
 ├── package.json
 └── README.md
