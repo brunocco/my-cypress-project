@@ -147,11 +147,14 @@ Caso haja falhas, o log mostrará detalhes do erro para depuração.
 
 ---
 
-## 💡 Dica Extra
+---
 
-Para visualizar os testes de forma interativa localmente:
+## ✅ Conclusão
 
-```bash
-npx cypress open
-```
+Este projeto prático demonstrou como automatizar testes E2E com Cypress em um sistema real (OrangeHRM Demo), integrando-os com ferramentas modernas da AWS como o CodeBuild. Além de reforçar conceitos de automação, a prática envolveu configuração de CI/CD, uso de infraestrutura em nuvem e integração com repositórios Git.
+
+Esse tipo de automação é essencial para garantir qualidade contínua no desenvolvimento de aplicações e representa um passo importante na jornada como QA e desenvolvedor em ambientes de DevOps e Cloud.
+
+🔁 Projeto em constante evolução!
+
 
