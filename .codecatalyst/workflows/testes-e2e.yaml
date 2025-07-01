@@ -7,13 +7,10 @@ Triggers:
       - main
 
 Actions:
-  RodarCypress:
-    Identifier: RodarCypressBuild
-    ActionType: AWS::CodeBuild::Build
+  RodarTestes:
+    Identifier: RodarTestesAction
+    ActionType: RunCommand
     Inputs:
-      Sources:
-        - WorkflowSource
-    Configuration:
       Runtime: nodejs18
       Commands:
         - echo "Instalando dependências..."
