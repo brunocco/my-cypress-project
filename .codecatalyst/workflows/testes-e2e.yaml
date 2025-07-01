@@ -1,0 +1,31 @@
+name: Rodar Testes Cypress
+
+triggers:
+  - type: push
+    branches:
+      - main
+
+actions:
+  rodar-cypress:
+    identifier: CypressRun
+    actionType: build
+    inputs:
+      sources:
+        - source: "my-cypress-project"  # 
+      buildspec: |
+        version: 0.2
+
+        phases:
+          install:
+            runtime-versions:
+              nodejs: 18
+            commands:
+              - echo "Instalando dependências..."
+              - npm install
+          build:
+            commands:
+              - echo "Rodando testes Cypress..."
+              - npx cypress run
+        artifacts:
+          files:
+            - "**/*"
