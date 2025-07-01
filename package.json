@@ -1,0 +1,18 @@
+{
+  "name": "my-cypress-project",
+  "version": "1.0.0",
+  "description": "Projeto pratico para fazer testes de automação usando o cypress, AWS amazon Q e CodeCatalyst",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run",
+    "open": "cypress open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^14.5.0"
+  }
+}
+
+
