@@ -1,28 +1,32 @@
-# 💻 Projeto Cypress - Testes de Login no OrangeHRM
 
-Este repositório contém um projeto de automação de testes E2E desenvolvido com [Cypress](https://www.cypress.io/), utilizando como sistema de testes o [OrangeHRM Demo](https://opensource-demo.orangehrmlive.com).
+# 💻 Projeto Cypress - Testes de Login no OrangeHRM com execução no AWS CodeBuild
 
-O projeto foi criado com o objetivo de praticar automação de testes, integrar com o **Amazon Q Developer** e futuramente utilizar **pipelines no Amazon CodeCatalyst** para execução contínua dos testes.
+Este repositório contém um projeto de automação de testes E2E desenvolvido com [Cypress](https://www.cypress.io/), utilizando como sistema alvo o [OrangeHRM Demo](https://opensource-demo.orangehrmlive.com).
+
+O objetivo do projeto é praticar automação de testes, integrar com o **Amazon Q Developer** e utilizar **pipelines no Amazon codebuild** para execução contínua (CI/CD).
 
 ---
 
 ## 👤 Autor
 
 **Bruno Cesar**  
-Estudante de Análise e Desenvolvimento de Sistemas • Analista QA + Suporte cloud = QA cloud 
-[LinkedIn](https://www.linkedin.com/in/bruno-cesar-704265223/)
+Estudante de Análise e Desenvolvimento de Sistemas  
+Analista QA + Suporte Cloud = QA Cloud  
+🔗 [LinkedIn](https://www.linkedin.com/in/bruno-cesar-704265223/)
 
 ---
 
-## 🚀 Tecnologias utilizadas
+## 🚀 Tecnologias Utilizadas
 
-- Cypress ^14.5.0
-- Node.js
-- Amazon Q Developer (IA de apoio)
-- Amazon CodeCatalyst (DevOps e CI/CD)
+- Cypress ^14.5.0  
+- Node.js  
+- Amazon Q Developer (IA de apoio)  
+- Amazon CodeCatalyst (DevOps e CI/CD)  
 
 ---
-📦 Estrutura do Projeto
+
+## 📁 Estrutura do Projeto
+
 ```bash
 my-cypress-project/
 ├── cypress/
@@ -33,103 +37,121 @@ my-cypress-project/
 ├── buildspec.yml
 └── README.md
 ```
+
 ---
+
 ## 📋 Casos de Teste
 
-- ✅ Login com sucesso (`Admin` / `admin123`)
+- ✅ Login com sucesso (`Admin` / `admin123`)  
 - ❌ Login com falha (senha incorreta)
 
 ---
 
-## ⚙️ Como executar o projeto
+## ⚙️ Como Executar o Projeto Localmente
 
-1. Clone este repositório:
+1. Clone o repositório:
 
 ```bash
 git clone https://github.com/brunocesardev/my-cypress-project.git
 cd my-cypress-project
+```
 
+2. Instale as dependências:
 
 ```bash
 npm install
 ```
 
-Para abrir o Cypress com interface gráfica:
+3. Para abrir o Cypress com interface gráfica:
+
 ```bash
-npm run open
+npx cypress open
 ```
 
-Para rodar os testes no terminal (modo headless):
+4. Para rodar os testes no terminal (modo headless):
+
 ```bash
 npm test
 ```
 
-✅ Casos de Teste
-- Login com sucesso
+---
 
-- Login com falha (senha incorreta)
+## 🌐 Site Alvo dos Testes
 
-🧪 Site alvo dos testes
 🔗 https://opensource-demo.orangehrmlive.com
 
+---
 
+## 📘 Integração com AWS CodeBuild
 
-📘 Roteiro de configuração do AWS CodeBuild para testes com Cypress
-🛠️ Pré-requisitos
-- Conta AWS ativa
-- Projeto Cypress com package.json configurado
-- Repositório no GitHub conectado ao CodeBuild
-- buildspec.yml no diretório raiz do projeto
+### 🛠️ Pré-requisitos
+
+- Conta AWS ativa  
+- Projeto Cypress com `package.json` e `buildspec.yml`  
+- Repositório no GitHub conectado ao CodeBuild  
 
 ---
-## ✅ Etapas de configuração no CodeBuild
-1. Acesse o AWS CodeBuild via Console da AWS.
 
-2. Crie um novo projeto com as seguintes configurações:
-- Project name: cypress-tests (ou outro nome desejado)
-- Source provider: GitHub
-- Repositório: selecione seu repositório
-- Branch: main (ou o branch principal do seu projeto)
+### ✅ Etapas de Configuração no CodeBuild
 
-3. Ambiente de build (Environment):
-- Environment image: Managed image
-- Operating system: Amazon Linux
-- Runtime: Standard
-- Image: aws/codebuild/amazonlinux-x86_64-standard:5.0
-- Privileged: habilite se for necessário usar docker-in-docker (não é o caso para Cypress, mas pode ser útil no futuro)
+1. Acesse o **AWS CodeBuild** via Console da AWS.
 
-4. Service Role:
+2. Crie um novo projeto com:
 
-- Crie uma nova ou selecione uma existente (codebuild-cypress-tests-service-role)
+   - **Project name**: `cypress-tests`  
+   - **Source provider**: GitHub  
+   - **Repositório e branch**: selecione os correspondentes ao seu projeto  
 
-5. Buildspec:
-- Marque a opção "Use a buildspec file"
-- O arquivo buildspec.yml deve estar na raiz do seu projeto
+3. Em **Environment (Ambiente)**:
 
-6. Logs (opcional):
-- Ative os logs no CloudWatch para melhor rastreio
+   - **Environment image**: *Managed image*  
+   - **Operating system**: *Amazon Linux*  
+   - **Runtime**: *Standard*  
+   - **Image**: `aws/codebuild/amazonlinux-x86_64-standard:5.0`  
+   - **Privileged**: Desnecessário para Cypress
 
-7. Finalize clicando em "Create build project"
+4. **Service role**:
 
----
-## 🧪 Executando o build
-Depois de configurar o projeto, clique em "Start build" e selecione o branch desejado. O CodeBuild vai:
+   - Crie uma nova ou selecione uma existente (ex: `codebuild-cypress-tests-service-role`)
 
-1. Instalar o Node.js e dependências
-2. Instalar bibliotecas necessárias para o Cypress no ambiente Linux
-3. Rodar os testes com npx cypress run
+5. Em **Buildspec**:
+
+   - Selecione **"Use a buildspec file"**  
+   - O arquivo `buildspec.yml` deve estar na raiz do projeto
+
+6. (Opcional) Ative logs no **CloudWatch** para acompanhar a execução
+
+7. Clique em **"Create build project"**
 
 ---
-## ✅ Resultado esperado
-O log do CodeBuild deverá mostrar algo como:
+
+## 🧪 Executando o Build
+
+Após a configuração, clique em **"Start build"**. O CodeBuild irá:
+
+1. Instalar o Node.js e dependências do projeto  
+2. Instalar as bibliotecas necessárias para o Cypress  
+3. Executar os testes com `npx cypress run`  
+
+---
+
+## ✅ Resultado Esperado
+
+Você deve ver algo como:
+
 ```bash
-✔  All specs passed!
+✔ All specs passed!
 ```
-Caso haja falhas nos testes, o log exibirá detalhes dos testes com erro.
+
+Caso haja falhas, o log mostrará detalhes do erro para depuração.
 
 ---
-## 💡 Dica extra
-Se quiser visualizar os testes em modo interativo localmente, rode:
+
+## 💡 Dica Extra
+
+Para visualizar os testes de forma interativa localmente:
+
 ```bash
 npx cypress open
 ```
+
