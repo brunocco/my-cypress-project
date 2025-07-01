@@ -1,33 +1,23 @@
-name: Rodar Testes Cypress
+SchemaVersion: 1.0
+Name: Rodar Testes Cypress
 
-triggers:
-  - type: push
-    branches:
+Triggers:
+  - Type: Push
+    Branches:
       - main
 
-actions:
-  rodar-cypress:
-    actionType: build
-    inputs:
-      sources:
-        - source: "my-cypress-project"
-      buildConfiguration:
-        buildspec: |
-          version: 0.2
+Actions:
+  RodarCypress:
+    ActionType: AWS::CodeBuild::Build
+    Inputs:
+      Sources:
+        - WorkflowSource
+    Configuration:
+      Runtime: nodejs18
+      Commands:
+        - echo "Instalando dependências..."
+        - npm install
+        - echo "Rodando testes Cypress..."
+        - npx cypress run
 
-          phases:
-            install:
-              runtime-versions:
-                nodejs: 18
-              commands:
-                - echo "Instalando dependências..."
-                - npm install
-            build:
-              commands:
-                - echo "Rodando testes Cypress..."
-                - npx cypress run
-
-          artifacts:
-            files:
-              - "**/*"
 
